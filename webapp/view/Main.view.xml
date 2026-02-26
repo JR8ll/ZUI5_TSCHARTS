@@ -1,0 +1,38 @@
+<mvc:View controllerName="r8ll.com.zui5tscharts.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:up="sap.m.upload"
+    xmlns:core="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+
+        <layout:FixFlex id='chartFixFlex' minFlexSize="250">
+            <layout:fixContent>
+                <up:UploadSet id="idUpload" fileTypes="csv" mediaTypes="text/csv" uploadUrl="../model/" uploadCompleted="onUpload" beforeItemAdded="onNewUpload" beforeItemRemoved="onDeleteFile" mode="None" noDataIllustrationType="NoChartData">
+                </up:UploadSet>
+                <Panel id="idPanel" class="panelStyle" expandable="true" expanded="true" headerText="Settings" width="auto">
+                    <content>
+                        <HBox class='settingsHBox'>
+                            <VBox width="200px">
+                                <Select id="idTypeSelect" selectedKey="{settings>/selectedChartType}" items="{settings>/chartTypes}">
+                                    <items>
+                                        <core:Item text="{settings>key}" key="{settings>value}"/>
+                                    </items>
+                                </Select>
+                            </VBox>
+                        </HBox>
+                    </content>
+                </Panel>
+            </layout:fixContent>
+            <layout:flexContent>
+                <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}"
+                height='100%' width="100%" vizType="{settings>/selectedChartType}" >
+                <!-- data, dimensions, feeds are managed by main.controller.js -->
+            </viz:VizFrame>
+            </layout:flexContent>
+        </layout:FixFlex>
+    </Page>
+</mvc:View>

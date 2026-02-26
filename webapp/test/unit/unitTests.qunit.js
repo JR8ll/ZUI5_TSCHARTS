@@ -1,0 +1,12 @@
+/* global QUnit */
+QUnit.config.autostart = false;
+
+sap.ui.getCore().attachInit(function () {
+	"use strict";
+
+	sap.ui.require([
+		"r8ll/com/zui5tscharts/test/unit/AllTests"
+	], function () {
+		QUnit.start();
+	});
+});
