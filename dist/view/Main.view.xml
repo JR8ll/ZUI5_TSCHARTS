@@ -56,7 +56,7 @@
                 </Panel>
                 <Panel expandable="false" expanded="true" headerText="Upper Chart Data" height="35vh">
             <up:UploadSet id="idUploadTop" uploadButtonInvisible="true"
-                        fileTypes="csv" mediaTypes="text/csv" uploadUrl="../model/" multiple="true" 
+                        fileTypes="csv" mediaTypes="text/csv" uploadUrl="../model/" multiple="false" showIcons="false"
                         uploadCompleted="onUpload" beforeItemAdded="onNewUpload" beforeItemRemoved="onDeleteFile" mode="None" noDataIllustrationType="NoChartData">
                         <up:illustratedMessage>
                             <IllustratedMessage title="{i18n>UploadNoDataText}" description="{i18n>DragDropDescription}" illustrationType="NoChartData"></IllustratedMessage>
@@ -65,7 +65,7 @@
             </Panel>
             <Panel expandable="false" expanded="true" headerText="Lower Chart Data" height="35vh">
                 <up:UploadSet id="idUploadBottom" uploadButtonInvisible="true"
-                        fileTypes="csv" mediaTypes="text/csv" uploadUrl="../model/" multiple="true" 
+                        fileTypes="csv" mediaTypes="text/csv" uploadUrl="../model/" multiple="false" 
                         uploadCompleted="onUpload" beforeItemAdded="onNewUpload" beforeItemRemoved="onDeleteFile" mode="None" noDataIllustrationType="NoChartData">
                  <up:illustratedMessage>
                     <IllustratedMessage title="{i18n>UploadNoDataText}" description="{i18n>DragDropDescription}" illustrationType="NoChartData"></IllustratedMessage>

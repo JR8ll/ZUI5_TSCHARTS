@@ -20,6 +20,14 @@ sap.ui.define([
         
         onUpload: function (oEvent) {
 			var bTop = oEvent.getSource().getId().includes("idUploadTop");
+			var aItems = oEvent.getSource().getItems();
+			if(aItems.length > 1) {
+				var oItem = aItems[0];
+				oEvent.getSource().removeAllItems();
+				oEvent.getSource().addItem(oItem);
+				// oEvent.getSource().removeItem(0);
+
+			}
             var oItem = oEvent.getParameters().item;
             var sFilename = oItem.getFileName();
             var oFileReader = new FileReader();
@@ -43,6 +51,20 @@ sap.ui.define([
             );
             oFileReader.readAsText(oItem.getFileObject());
         },
+
+		onDeleteFile: function(oEvent) {
+			var bTop = oEvent.getSource().getId().includes("idUploadTop");
+			var sModel;
+			if(bTop) {
+				// oVizFrame = this.byId("idVizFrameTop");
+				sModel = "chartDataTop";
+			} else {
+				// oVizFrame = this.byId("idVizFrameBottom");
+				sModel = "chartDataBottom";
+			}
+			 var oModel = this.getOwnerComponent().getModel(sModel);
+			 oModel.setData();
+		},
 
         _parseCsv: function(csvText, delimitter) {
             return csvText.trim().split(/\r?\n/).filter(l => l.trim() != '').map(line => line.split(delimitter));
