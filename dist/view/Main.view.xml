@@ -7,11 +7,13 @@
     xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
     xmlns:up="sap.m.upload"
     xmlns:core="sap.ui.core">
-    <Page id="page" title="{i18n>title}">
+    <!-- <Page id="page" title="{i18n>title}">
 
         <layout:FixFlex id='chartFixFlex' minFlexSize="250">
             <layout:fixContent>
-                <up:UploadSet id="idUpload" fileTypes="csv" mediaTypes="text/csv" uploadUrl="../model/" uploadCompleted="onUpload" beforeItemAdded="onNewUpload" beforeItemRemoved="onDeleteFile" mode="None" noDataIllustrationType="NoChartData">
+                <up:UploadSet id="idUpload" 
+                    fileTypes="csv" mediaTypes="text/csv" uploadUrl="../model/" multiple="true" 
+                    uploadCompleted="onUpload" beforeItemAdded="onNewUpload" beforeItemRemoved="onDeleteFile" mode="None" noDataIllustrationType="NoChartData">
                 </up:UploadSet>
                 <Panel id="idPanel" class="panelStyle" expandable="true" expanded="true" headerText="Settings" width="auto">
                     <content>
@@ -28,11 +30,62 @@
                 </Panel>
             </layout:fixContent>
             <layout:flexContent>
-                <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}"
-                height='100%' width="100%" vizType="{settings>/selectedChartType}" >
-                <!-- data, dimensions, feeds are managed by main.controller.js -->
-            </viz:VizFrame>
+            <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}"
+                    height='100%' width="100%" vizType="{settings>/selectedChartType}" > </viz:VizFrame>
             </layout:flexContent>
         </layout:FixFlex>
-    </Page>
+    </Page>  -->
+        
+    
+
+<Page>
+    <layout:FixFlex id='chartFixFlex' fixContentSize="15vw" minFlexSize="250" vertical="false">
+        <layout:fixContent>
+            <Panel id="idPanel" class="panelStyle" expandable="false" expanded="true" headerText="Settings" width="auto" height="15vh">
+                    <content>
+                        <HBox class='settingsHBox'>
+                            <VBox width="200px">
+                                <Select id="idTypeSelect" selectedKey="{settings>/selectedChartType}" items="{settings>/chartTypes}">
+                                    <items>
+                                        <core:Item text="{settings>key}" key="{settings>value}"/>
+                                    </items>
+                                </Select>
+                            </VBox>
+                        </HBox>
+                    </content>
+                </Panel>
+                <Panel expandable="false" expanded="true" headerText="Upper Chart Data" height="35vh">
+            <up:UploadSet id="idUploadTop" uploadButtonInvisible="true"
+                        fileTypes="csv" mediaTypes="text/csv" uploadUrl="../model/" multiple="true" 
+                        uploadCompleted="onUpload" beforeItemAdded="onNewUpload" beforeItemRemoved="onDeleteFile" mode="None" noDataIllustrationType="NoChartData">
+                        <up:illustratedMessage>
+                            <IllustratedMessage title="{i18n>UploadNoDataText}" description="{i18n>DragDropDescription}" illustrationType="NoChartData"></IllustratedMessage>
+                        </up:illustratedMessage>
+            </up:UploadSet>
+            </Panel>
+            <Panel expandable="false" expanded="true" headerText="Lower Chart Data" height="35vh">
+                <up:UploadSet id="idUploadBottom" uploadButtonInvisible="true"
+                        fileTypes="csv" mediaTypes="text/csv" uploadUrl="../model/" multiple="true" 
+                        uploadCompleted="onUpload" beforeItemAdded="onNewUpload" beforeItemRemoved="onDeleteFile" mode="None" noDataIllustrationType="NoChartData">
+                 <up:illustratedMessage>
+                    <IllustratedMessage title="{i18n>UploadNoDataText}" description="{i18n>DragDropDescription}" illustrationType="NoChartData"></IllustratedMessage>
+                </up:illustratedMessage>
+             </up:UploadSet>
+            </Panel>
+        </layout:fixContent>
+        <layout:flexContent>
+            <HBox>
+                <VBox width="100%" height="100px">
+                    <viz:VizFrame id="idVizFrameTop" uiConfig="{applicationSet:'fiori'}"
+                        height='45vh' width="85vw" vizType="{settings>/selectedChartType}" > </viz:VizFrame>
+                    <viz:VizFrame id="idVizFrameBottom" uiConfig="{applicationSet:'fiori'}"
+                        height='45vh' width="85vw" vizType="{settings>/selectedChartType}" > </viz:VizFrame>     
+                </VBox>
+                <!-- <VBox width="30%" height="100%">
+                    <viz:VizFrame id="chartSmall" height="100%" width="100%" ... />
+                </VBox> -->
+            </HBox>
+        </layout:flexContent>
+    </layout:FixFlex>
+</Page>
 </mvc:View>
